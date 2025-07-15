@@ -11,9 +11,8 @@ from app.database import get_db
 from app.models import User
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path="../../infra/.env")
+load_dotenv()
 
-# Хешируем пароль
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated=['auto'])
 
 
@@ -25,7 +24,6 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 
-# JWT
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
