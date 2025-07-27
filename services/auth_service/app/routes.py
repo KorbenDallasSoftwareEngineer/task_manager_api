@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from app import models, schemas, auth
+from app import models, auth, schemas
 from app.database import get_db
 from app.auth import verify_password, create_access_token, get_current_user
 from app.schemas import UserLogin
@@ -37,6 +37,7 @@ async def get_me(current_user: models.User = Depends(get_current_user)):
     return current_user
 
 
+# временная проверялка
 @router.get("/ping_redis")
 async def ping_redis():
     await redis_client.set('hello', 'world', ex=60)

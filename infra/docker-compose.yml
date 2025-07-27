@@ -1,12 +1,13 @@
 services:
+
   postgres:
     image: postgres:15
     container_name: auth_postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: auth_db
+      POSTGRES_PASSWORD: kilo171polo
+      POSTGRES_DB: task_manager
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:

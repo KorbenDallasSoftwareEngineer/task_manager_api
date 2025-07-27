@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.post('/tasks', response_model=schemas.TaskResponse)
-async def create_task(task: schemas.TaskCreate, db: AsyncSession = Depends(get_db), user_id: str = Depends(verify_token)):
+async def create_task(task: schemas.TaskCreate, db: AsyncSession = Depends(get_db)):
     return await crud.create_task(db, task)
 
 
@@ -19,7 +19,7 @@ async def read_tasks(db: AsyncSession = Depends(get_db), user_id: str = Depends(
 
 
 @router.get("/tasks/{task_id}", response_model=schemas.TaskResponse)
-async def read_task(task_id: int, db: AsyncSession = Depends(get_db)):
+async def read_task(task_id: int, db: AsyncSession = Depends(get_db), user_id: str = Depends(verify_token)):
     task = await crud.get_task(db, task_id)
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
