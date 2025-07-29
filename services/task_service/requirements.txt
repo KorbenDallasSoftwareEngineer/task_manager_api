@@ -4,3 +4,4 @@ sqlalchemy
 asyncpg
 alembic
 python-dotenv
+redis[async]>=4.6.0
