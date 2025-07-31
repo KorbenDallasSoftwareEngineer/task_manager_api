@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.notifications import publish_notification
 from app import schemas, crud
 from app.database import get_db
 from app.auth import verify_token
@@ -41,3 +42,11 @@ async def delete_task(task_id: int, db: AsyncSession = Depends(get_db), user_id:
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
+
+# Временная проверялка
+
+
+@router.get("/send_test_notification")
+async def send_test_notification():
+    await publish_notification('notifications', "Привет из task_service!")
+    return {'status': 'sent'}

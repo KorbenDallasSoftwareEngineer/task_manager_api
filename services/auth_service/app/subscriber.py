@@ -1,5 +1,5 @@
 import asyncio
-from app.cache import redis_client
+from cache import redis_client
 
 
 async def handle_message():
